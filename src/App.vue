@@ -37,7 +37,7 @@ watch(breakpoints.tablet, (isTablet) => {
     <main role="main">
       <header class="header">
         <h3 class="title">Previous Rulings</h3>
-        <ViewMenu class="menu" @select="viewMode = $event" />
+        <ViewMenu class="menu" v-model="viewMode" />
       </header>
 
       <div
