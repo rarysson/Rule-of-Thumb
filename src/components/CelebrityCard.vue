@@ -4,6 +4,7 @@ import { formatDistanceToNowStrict } from "date-fns";
 
 const props = defineProps<{
   celebrity: Celebrity;
+  extended?: boolean;
 }>();
 
 const positiveWeight = computed(
@@ -29,7 +30,7 @@ function formatTimestamp(date: string): string {
 </script>
 
 <template>
-  <article class="card">
+  <article class="card" :class="{ extended }">
     <div class="card__content">
       <div class="content__sentiment">
         <button
@@ -100,6 +101,17 @@ function formatTimestamp(date: string): string {
   background-position: center;
 }
 
+.card.extended {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 138px;
+  max-height: 170px;
+  aspect-ratio: initial;
+  background-size: 25%;
+  background-position: -25px center;
+}
+
 .card::before {
   z-index: 0;
   position: absolute;
@@ -113,12 +125,29 @@ function formatTimestamp(date: string): string {
   );
 }
 
+.card.extended::before {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.0001) 0%,
+    #888888 19.79%,
+    #666666 50%,
+    rgba(51, 51, 51, 0.6) 71.88%
+  );
+}
+
 .card__content {
   padding-right: 34px;
   display: flex;
   gap: 2px;
   color: var(--color-white);
   z-index: 1;
+}
+
+.card.extended .card__content {
+  gap: 170px;
+  padding: 0;
 }
 
 .icon-button {
@@ -133,7 +162,16 @@ function formatTimestamp(date: string): string {
 .content__info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  row-gap: 12px;
+  column-gap: 28px;
+}
+
+.card.extended .content__info {
+  padding-top: 8px;
+  padding-right: 12px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
 }
 
 .content__info p {
@@ -160,6 +198,10 @@ function formatTimestamp(date: string): string {
   gap: 12px;
 }
 
+.card.extended .info__buttons {
+  margin-top: -34px;
+}
+
 .info__buttons .icon-button:hover,
 .info__buttons .icon-button:active {
   outline: 2px solid var(--color-white);
@@ -179,6 +221,7 @@ function formatTimestamp(date: string): string {
   display: flex;
   width: 100%;
   height: 36px;
+  min-height: 36px;
   z-index: 1;
 }
 
