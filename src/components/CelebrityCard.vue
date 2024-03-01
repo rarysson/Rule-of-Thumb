@@ -109,8 +109,8 @@ function formatTimestamp(date: string): string {
 
 @media all and (min-width: 768px) {
   .card {
-    width: 348px;
-    height: 348px;
+    width: 340px;
+    height: 340px;
   }
 }
 

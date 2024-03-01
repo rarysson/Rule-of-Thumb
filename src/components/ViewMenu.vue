@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 const emit = defineEmits<{
   (e: "select", option: ViewMode): void;
@@ -7,6 +8,7 @@ const emit = defineEmits<{
 
 const currentOption = ref<ViewMode>("list");
 const open = ref(false);
+const target = ref(null);
 
 function selectionOption(option: ViewMode) {
   currentOption.value = option;
@@ -16,10 +18,12 @@ function selectionOption(option: ViewMode) {
 watch(currentOption, (option) => {
   emit("select", option);
 });
+
+onClickOutside(target, () => (open.value = false));
 </script>
 
 <template>
-  <div class="menu">
+  <div class="menu" ref="target">
     <button @click="open = !open">
       {{ currentOption }}
       <img src="../assets/img/triangle.svg" alt="menu" />
@@ -69,6 +73,7 @@ img {
   flex-direction: column;
   position: absolute;
   z-index: 9;
+  bottom: -200%;
 }
 
 .options button {
