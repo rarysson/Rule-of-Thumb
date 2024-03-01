@@ -94,6 +94,14 @@ main h2 {
   display: contents;
 }
 
+.overflow-text-vertically {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media all and (min-width: 768px) {
   html,
   body {
