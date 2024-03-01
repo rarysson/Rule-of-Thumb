@@ -41,15 +41,20 @@ watch(currentOption, (option) => {
 button {
   cursor: pointer;
   position: relative;
-  min-width: 130px;
-  max-width: 170px;
-  min-height: 28px;
-  max-height: 36px;
+  width: 130px;
+  height: 28px;
   font-size: 13px;
   font-family: inherit;
   text-transform: capitalize;
   background-color: var(--color-white);
   border: 2px solid var(--color-darker-gray);
+}
+
+@media all and (min-width: 1100px) {
+  button {
+    width: 170px;
+    height: 36px;
+  }
 }
 
 img {

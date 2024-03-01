@@ -90,10 +90,8 @@ function formatTimestamp(date: string): string {
   flex-direction: column;
   justify-content: flex-end;
   gap: 12px;
-  min-width: 300px;
-  max-width: 348px;
-  min-height: 300px;
-  max-height: 348px;
+  width: 300px;
+  height: 300px;
   aspect-ratio: 1 / 1;
   background-image: v-bind("`url('src/assets/img/${celebrity.picture}')`");
   background-repeat: no-repeat;
@@ -103,13 +101,23 @@ function formatTimestamp(date: string): string {
 
 .card.extended {
   width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  min-height: 138px;
-  max-height: 170px;
+  height: 138px;
   aspect-ratio: initial;
   background-size: 25%;
   background-position: -25px center;
+}
+
+@media all and (min-width: 768px) {
+  .card {
+    width: 348px;
+    height: 348px;
+  }
+}
+
+@media all and (min-width: 1100px) {
+  .card.extended {
+    height: 170px;
+  }
 }
 
 .card::before {
