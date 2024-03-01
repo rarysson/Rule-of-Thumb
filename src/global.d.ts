@@ -11,3 +11,5 @@ declare type Celebrity = {
   lastUpdated: string;
   votes: Votes;
 }
+
+declare type ViewMode = 'list' | 'grid'
