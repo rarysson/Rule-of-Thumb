@@ -5,6 +5,11 @@ An app to track users' sentiments on trending and controversial people from diff
 ## Tech
 
 - Vue
+- TypeScript
+- VueUse
+- Vite
+- Vitest
+- date-fns
 
 ## Instructions
 
