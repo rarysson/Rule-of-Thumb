@@ -4,6 +4,7 @@ type Votes = {
 }
 
 declare type Celebrity = {
+  id: string;
   name: string;
   description: string;
   category: string;
@@ -13,3 +14,7 @@ declare type Celebrity = {
 }
 
 declare type ViewMode = 'list' | 'grid'
+
+declare type ThumbsMode = 'up' | 'down' | 'none'
+
+declare type Vote = 'positive' | 'negative'

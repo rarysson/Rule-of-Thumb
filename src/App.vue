@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, onBeforeMount } from "vue";
 import { useBreakpoints } from "@vueuse/core";
 
 import AppNav from "./components/AppNav.vue";
@@ -19,13 +19,19 @@ const breakpoints = useBreakpoints({
 });
 
 const viewMode = ref<ViewMode>(breakpoints.tablet.value ? "list" : "grid");
-const celebrities = fetchCelebrities();
+const celebrities = ref<Celebrity[]>([]);
 
 watch(breakpoints.tablet, (isTablet) => {
   if (!isTablet) {
     viewMode.value = "grid";
   }
 });
+
+function getAllCelebrities() {
+  celebrities.value = fetchCelebrities();
+}
+
+onBeforeMount(getAllCelebrities);
 </script>
 
 <template>
@@ -46,9 +52,10 @@ watch(breakpoints.tablet, (isTablet) => {
       >
         <CelebrityCard
           v-for="celebrity in celebrities"
-          :key="celebrity.picture"
+          :key="celebrity.id"
           :celebrity="celebrity"
           :extended="viewMode === 'list'"
+          @update="getAllCelebrities"
         />
       </div>
     </main>

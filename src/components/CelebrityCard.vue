@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { formatDistanceToNowStrict } from "date-fns";
+
+import { updateCelebrity } from "../services/api";
+
+const emit = defineEmits<{
+  (e: "update"): void;
+}>();
 
 const props = defineProps<{
   celebrity: Celebrity;
   extended?: boolean;
 }>();
+
+const currentThumbs = ref<ThumbsMode>("none");
+const voted = ref(false);
 
 const positiveWeight = computed(
   () =>
@@ -26,6 +35,24 @@ const negativeWeight = computed(
 
 function formatTimestamp(date: string): string {
   return formatDistanceToNowStrict(new Date(date));
+}
+
+function updateThumbs(mode: ThumbsMode) {
+  currentThumbs.value = mode;
+}
+
+function handleVote() {
+  voted.value = !voted.value;
+
+  if (voted.value) {
+    updateCelebrity(
+      props.celebrity.id,
+      currentThumbs.value === "up" ? "positive" : "negative"
+    );
+    emit("update");
+  }
+
+  currentThumbs.value = "none";
 }
 </script>
 
@@ -53,19 +80,38 @@ function formatTimestamp(date: string): string {
         <p class="info__description overflow-text-vertically">
           {{ celebrity.description }}
         </p>
-        <p class="info__timestamp">
+        <p v-if="!voted" class="info__timestamp">
           {{ formatTimestamp(celebrity.lastUpdated) }} ago in
           <span class="info__category">{{ celebrity.category }}</span>
         </p>
+        <p v-else class="info__timestamp">Thank you for your vote!</p>
 
         <div class="info__buttons">
-          <button class="icon-button" aria-label="thumbs up">
+          <button
+            class="icon-button"
+            :class="{ selected: currentThumbs === 'up' }"
+            aria-label="thumbs up"
+            :disabled="voted"
+            @click="updateThumbs('up')"
+          >
             <img src="../assets/img/thumbs-up.svg" alt="thumbs up" />
           </button>
-          <button class="icon-button" aria-label="thumbs down">
+          <button
+            class="icon-button"
+            :class="{ selected: currentThumbs === 'down' }"
+            aria-label="thumbs down"
+            :disabled="voted"
+            @click="updateThumbs('down')"
+          >
             <img src="../assets/img/thumbs-down.svg" alt="thumbs down" />
           </button>
-          <button class="info__cta">Vote Now</button>
+          <button
+            class="info__cta"
+            :disabled="currentThumbs === 'none' && !voted"
+            @click="handleVote"
+          >
+            {{ voted ? "Vote Again" : "Vote Now" }}
+          </button>
         </div>
       </div>
     </div>
@@ -210,10 +256,15 @@ function formatTimestamp(date: string): string {
   margin-top: -34px;
 }
 
-.info__buttons .icon-button:hover,
-.info__buttons .icon-button:active {
+.info__buttons .icon-button:not(:disabled):hover,
+.info__buttons .icon-button:not(:disabled):active,
+.info__buttons .icon-button.selected {
   outline: 2px solid var(--color-white);
   cursor: pointer;
+}
+
+.info__buttons .icon-button:disabled {
+  cursor: not-allowed;
 }
 
 .info__cta {
@@ -223,6 +274,11 @@ function formatTimestamp(date: string): string {
   background-color: var(--color-darker-background);
   color: var(--color-white);
   font-size: 15px;
+}
+
+.info__cta:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-dark-background);
 }
 
 .card__gauge-bar {
