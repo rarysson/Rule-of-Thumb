@@ -18,7 +18,7 @@ const breakpoints = useBreakpoints({
   desktop: 1100,
 });
 
-const viewMode = ref<ViewMode>("list");
+const viewMode = ref<ViewMode>(breakpoints.tablet.value ? "list" : "grid");
 const celebrities = fetchCelebrities();
 
 watch(breakpoints.tablet, (isTablet) => {
