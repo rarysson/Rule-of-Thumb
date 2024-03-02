@@ -46,7 +46,7 @@ button {
   position: relative;
   width: 130px;
   height: 28px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-family: inherit;
   text-transform: capitalize;
   background-color: var(--color-white);

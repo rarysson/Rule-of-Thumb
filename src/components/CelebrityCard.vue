@@ -135,7 +135,7 @@ function handleVote() {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 0.75rem;
   width: 300px;
   height: 300px;
   aspect-ratio: 1 / 1;
@@ -192,15 +192,15 @@ function handleVote() {
 }
 
 .card__content {
-  padding-right: 34px;
+  padding-right: 2.125rem;
   display: flex;
-  gap: 2px;
+  gap: 0.125rem;
   color: var(--color-white);
   z-index: 1;
 }
 
 .card.extended .card__content {
-  gap: 170px;
+  gap: 10.625rem;
   padding: 0;
 }
 
@@ -216,13 +216,13 @@ function handleVote() {
 .content__info {
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
-  column-gap: 28px;
+  row-gap: 0.75rem;
+  column-gap: 1.75rem;
 }
 
 .card.extended .content__info {
-  padding-top: 8px;
-  padding-right: 12px;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-auto-flow: column;
@@ -233,15 +233,15 @@ function handleVote() {
 }
 
 .info__name {
-  font-size: 30px;
+  font-size: 1.875rem;
 }
 
 .info__description {
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .info__timestamp {
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: right;
 }
 
@@ -249,11 +249,11 @@ function handleVote() {
   justify-content: flex-end;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .card.extended .info__buttons {
-  margin-top: -34px;
+  margin-top: -2.125rem;
 }
 
 .info__buttons .icon-button:not(:disabled):hover,
@@ -269,11 +269,11 @@ function handleVote() {
 
 .info__cta {
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
   border: 1px solid var(--color-white);
   background-color: var(--color-darker-background);
   color: var(--color-white);
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .info__cta:disabled {
@@ -292,10 +292,10 @@ function handleVote() {
 .card__gauge-bar > * {
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 0.75rem;
   color: var(--color-white);
-  font-size: 18px;
-  gap: 6px;
+  font-size: 1.125rem;
+  gap: 0.375rem;
 }
 
 .gauge-bar__positive {

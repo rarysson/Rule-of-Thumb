@@ -70,7 +70,7 @@ onBeforeMount(getAllCelebrities);
 
 <style scoped>
 main {
-  padding: 0 1rem;
+  padding: 0 16px;
 }
 
 .header {
@@ -80,7 +80,7 @@ main {
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -90,14 +90,14 @@ main {
 .celebrities-container {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0.875rem;
   overflow: initial;
 }
 
 .celebrities-container.grid-mode {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 0.75rem;
   overflow: auto;
 }
 
@@ -112,7 +112,7 @@ main {
 
   .celebrities-container.grid-mode {
     display: grid;
-    gap: 21px;
+    gap: 1.3125rem;
     justify-items: center;
     grid-template-columns: 1fr 1fr;
   }
@@ -120,7 +120,7 @@ main {
 
 @media all and (min-width: 1100px) {
   .celebrities-container {
-    gap: 18px;
+    gap: 1.125rem;
   }
 
   .celebrities-container.grid-mode {

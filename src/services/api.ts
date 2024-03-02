@@ -18,9 +18,15 @@ export function fetchCelebrities(): Celebrity[] {
 }
 
 export function updateCelebrity(id: string, vote: Vote) {
-  const celebrity = JSON.parse(localStorage.getItem(id) || '{}') as Celebrity
+  const item = localStorage.getItem(id)
 
-  celebrity.lastUpdated = (new Date()).toISOString()
+  if (!item) {
+    throw new Error("Invalid celebrity id")
+  }
+
+  const celebrity = JSON.parse(item) as Celebrity
+
+  celebrity.lastUpdated = new Date().toISOString()
   celebrity.votes[vote] += 1
 
   localStorage.setItem(id, JSON.stringify(celebrity))
